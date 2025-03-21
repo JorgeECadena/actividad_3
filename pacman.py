@@ -140,9 +140,14 @@ def move():
                 vector(0, 5),
                 vector(0, -5),
             ]
-            plan = choice(options)
-            course.x = plan.x
-            course.y = plan.y
+            # plan = choice(options)
+            # course.x = plan.x
+            # course.y = plan.y
+            options = [v for v in options if valid(point + v)]  # Keep only valid moves
+            if options:
+                best = min(options, key=lambda v: abs((point + v) - pacman))  # Closest to Pac-Man
+                course.x = best.x
+                course.y = best.y
 
         up()
         goto(point.x + 10, point.y + 10)
